@@ -31,7 +31,25 @@ npx @modelcontextprotocol/inspector@latest
 
 ## Cloudflare에 배포
 
-### 1. workers.dev에 배포
+### 1. Create Application + GitHub 연결 (권장)
+
+대시보드에서 저장소를 연결하면 **push 시 자동 배포**됩니다.
+
+1. [Workers & Pages](https://dash.cloudflare.com/?to=/:account/workers-and-pages) → **Create application**
+2. **Import a repository** → **Get started**
+3. GitHub 계정 선택 후 이 저장소(`khch-dev/mcp-server-test`) 선택
+4. **설정**
+   - **Build command**: 비워 두기 (또는 `npm run type-check` — 빌드 단계 없이 Wrangler가 TypeScript 번들)
+   - **Deploy command**: `npm run deploy` 또는 기본값 `npx wrangler deploy`
+   - **Root directory**: 비워 두기 (저장소 루트가 프로젝트 루트)
+5. **Save and Deploy**
+
+배포 후 URL: `https://mcp-bmad-quick-spec.<계정명>.workers.dev/mcp`  
+이후 `main` 브랜치에 push할 때마다 자동으로 재배포됩니다.
+
+> **참고:** Cloudflare에 연결할 Worker 이름은 `wrangler.jsonc`의 `name`(`mcp-bmad-quick-spec`)과 맞추는 것이 좋습니다. ([문서](https://developers.cloudflare.com/workers/ci-cd/builds/troubleshoot/#workers-name-requirement))
+
+### 2. workers.dev에 수동 배포 (CLI)
 
 ```bash
 npm run deploy
@@ -39,7 +57,7 @@ npm run deploy
 
 배포 후 URL 예: `https://mcp-bmad-quick-spec.<계정명>.workers.dev/mcp`
 
-### 2. 커스텀 도메인 연결 (Cloudflare에 도메인 생성된 경우)
+### 3. 커스텀 도메인 연결 (Cloudflare에 도메인 생성된 경우)
 
 Cloudflare 대시보드에서 이미 도메인을 추가한 상태라면:
 
