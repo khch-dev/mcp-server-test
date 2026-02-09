@@ -1,0 +1,29 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "mcp-bmad-quick-spec",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-03-10",
+  "compatibility_flags": ["nodejs_compat"],
+  "migrations": [
+    {
+      "new_sqlite_classes": ["BmadQuickSpecMCP"],
+      "tag": "v1"
+    }
+  ],
+  "durable_objects": {
+    "bindings": [
+      {
+        "class_name": "BmadQuickSpecMCP",
+        "name": "MCP_OBJECT"
+      }
+    ]
+  },
+  "observability": {
+    "enabled": true
+  }
+  // 커스텀 도메인 사용 시 Cloudflare 대시보드에서 Worker에 도메인 연결하거나,
+  // 아래처럼 routes를 추가하세요 (pattern은 사용할 호스트명으로 변경).
+  // "routes": [
+  //   { "pattern": "mcp.yourdomain.com", "custom_domain": true }
+  // ],
+}
